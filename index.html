@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f3ea">
+    <title>Прайс-лист микромаркета</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Микромаркет</p>
+          <h1 id="page-title">Прайс-лист</h1>
+          <p class="hero-note">Актуальные цены на продукты и напитки</p>
+        </div>
+        <img class="hero-mark" src="assets/market-mark.svg" width="144" height="144" alt="">
+      </section>
+
+      <section class="toolbar" aria-label="Фильтры прайс-листа">
+        <label class="search">
+          <span class="visually-hidden">Поиск товара</span>
+          <input id="search" type="search" inputmode="search" autocomplete="off" placeholder="Найти товар">
+        </label>
+        <div id="categoryTabs" class="tabs" role="tablist" aria-label="Категории"></div>
+      </section>
+
+      <section class="summary" aria-label="Сводка прайса">
+        <div>
+          <span id="itemCount" class="summary-value">0</span>
+          <span id="itemCountLabel" class="summary-label">позиций</span>
+        </div>
+        <div>
+          <span id="priceRange" class="summary-value">-</span>
+          <span class="summary-label">диапазон цен</span>
+        </div>
+      </section>
+
+      <section id="priceList" class="price-list" aria-live="polite"></section>
+
+      <p id="emptyState" class="empty-state" hidden>Ничего не найдено</p>
+
+      <footer class="footer">
+        <span>Цены указаны в рублях</span>
+        <span id="updatedAt"></span>
+      </footer>
+    </main>
+
+    <script type="module">
+      const priceList = document.querySelector("#priceList");
+      const categoryTabs = document.querySelector("#categoryTabs");
+      const searchInput = document.querySelector("#search");
+      const itemCount = document.querySelector("#itemCount");
+      const itemCountLabel = document.querySelector("#itemCountLabel");
+      const priceRange = document.querySelector("#priceRange");
+      const emptyState = document.querySelector("#emptyState");
+      const updatedAt = document.querySelector("#updatedAt");
+
+      const state = {
+        category: "all",
+        query: "",
+        data: null
+      };
+
+      const formatPrice = (price) => `${new Intl.NumberFormat("ru-RU").format(price)} ₽`;
+
+      const formatDate = (value) => {
+        const date = new Date(`${value}T12:00:00`);
+        return new Intl.DateTimeFormat("ru-RU", {
+          day: "numeric",
+          month: "long",
+          year: "numeric"
+        }).format(date);
+      };
+
+      const normalize = (value) => value.toLocaleLowerCase("ru-RU").replace(/\s+/g, " ").trim();
+
+      const pluralizePosition = (count) => {
+        const lastTwo = count % 100;
+        const last = count % 10;
+        if (lastTwo >= 11 && lastTwo <= 14) return "позиций";
+        if (last === 1) return "позиция";
+        if (last >= 2 && last <= 4) return "позиции";
+        return "позиций";
+      };
+
+      const allItems = () => state.data.categories.flatMap((category) =>
+        category.items.map((item) => ({ ...item, categoryId: category.id, categoryTitle: category.title }))
+      );
+
+      const filteredItems = () => {
+        const query = normalize(state.query);
+        return allItems().filter((item) => {
+          const matchesCategory = state.category === "all" || item.categoryId === state.category;
+          const searchable = normalize(`${item.name} ${item.details ?? ""}`);
+          return matchesCategory && (!query || searchable.includes(query));
+        });
+      };
+
+      const renderTabs = () => {
+        const tabs = [
+          { id: "all", title: "Все" },
+          ...state.data.categories.map(({ id, title }) => ({ id, title }))
+        ];
+
+        categoryTabs.innerHTML = tabs.map((tab) => `
+          <button class="tab" type="button" role="tab" aria-selected="${tab.id === state.category}" data-category="${tab.id}">
+            ${tab.title}
+          </button>
+        `).join("");
+      };
+
+      const renderSummary = (items) => {
+        itemCount.textContent = items.length;
+        itemCountLabel.textContent = pluralizePosition(items.length);
+        if (!items.length) {
+          priceRange.textContent = "-";
+          return;
+        }
+
+        const prices = items.map((item) => item.price);
+        const min = Math.min(...prices);
+        const max = Math.max(...prices);
+        priceRange.textContent = min === max ? formatPrice(min) : `${formatPrice(min)} - ${formatPrice(max)}`;
+      };
+
+      const renderList = () => {
+        const items = filteredItems();
+        renderSummary(items);
+        emptyState.hidden = items.length > 0;
+
+        const grouped = state.data.categories
+          .map((category) => ({
+            ...category,
+            items: items.filter((item) => item.categoryId === category.id)
+          }))
+          .filter((category) => category.items.length);
+
+        priceList.innerHTML = grouped.map((category) => `
+          <article class="category">
+            <header class="category-header">
+              <h2>${category.title}</h2>
+              <span>${category.items.length}</span>
+            </header>
+            <div class="items">
+              ${category.items.map((item) => `
+                <div class="item">
+                  <div class="item-main">
+                    <h3>${item.name}</h3>
+                    ${item.details ? `<p>${item.details}</p>` : ""}
+                  </div>
+                  <strong>${formatPrice(item.price)}</strong>
+                </div>
+              `).join("")}
+            </div>
+          </article>
+        `).join("");
+      };
+
+      categoryTabs.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-category]");
+        if (!button) return;
+        state.category = button.dataset.category;
+        renderTabs();
+        renderList();
+      });
+
+      searchInput.addEventListener("input", (event) => {
+        state.query = event.target.value;
+        renderList();
+      });
+
+      const response = await fetch("data/prices.json");
+      state.data = await response.json();
+      updatedAt.textContent = `Обновлено ${formatDate(state.data.updatedAt)}`;
+      renderTabs();
+      renderList();
+    </script>
+  </body>
+</html>

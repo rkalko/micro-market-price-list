@@ -1,11 +1,11 @@
 {
   "title": "Прайс-лист микромаркета",
-  "updatedAt": "2026-06-01",
+  "updatedAt": "2026-09-10",
   "currency": "RUB",
   "source": {
-    "spreadsheetId": "1lDxjyHaf99xXtl6Ktw_F1a4pnfti4srvjDDLejSX4bs",
+    "spreadsheetId": "1xzuzm212lU10DwUxVl5E0jEIEjVFWkYBJLiR-6S3sCI",
     "sheet": "Лист1",
-    "range": "A2:D29"
+    "columns": "Категория | Название | Фасовка | Цена"
   },
   "categories": [
     {

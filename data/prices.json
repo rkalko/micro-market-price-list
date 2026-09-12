@@ -1,6 +1,6 @@
 {
   "title": "Прайс-лист микромаркета",
-  "updatedAt": "2026-09-11",
+  "updatedAt": "2026-09-12",
   "currency": "RUB",
   "source": {
     "spreadsheetId": "1xzuzm212lU10DwUxVl5E0jEIEjVFWkYBJLiR-6S3sCI",
@@ -13,9 +13,9 @@
       "title": "Сэндвичи",
       "items": [
         {
-          "name": "Твистер с курицей",
-          "details": "180 г",
-          "price": 240
+          "name": "Сэндвич с курицей в пите",
+          "details": "160 г",
+          "price": 250
         },
         {
           "name": "Твистер шаурма",

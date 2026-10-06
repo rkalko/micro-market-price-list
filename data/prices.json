@@ -1,6 +1,6 @@
 {
   "title": "Прайс-лист микромаркета",
-  "updatedAt": "2026-09-12",
+  "updatedAt": "2026-10-06",
   "currency": "RUB",
   "source": {
     "spreadsheetId": "1xzuzm212lU10DwUxVl5E0jEIEjVFWkYBJLiR-6S3sCI",
@@ -14,6 +14,11 @@
       "items": [
         {
           "name": "Сэндвич с курицей в пите",
+          "details": "160 г",
+          "price": 250
+        },
+        {
+          "name": "Сэндвич с яйцом, курицей и сыром в темном хлебе",
           "details": "160 г",
           "price": 250
         },

@@ -1,6 +1,6 @@
 {
   "title": "Прайс-лист микромаркета",
-  "updatedAt": "2026-10-12",
+  "updatedAt": "2026-10-15",
   "currency": "RUB",
   "source": {
     "spreadsheetId": "1xzuzm212lU10DwUxVl5E0jEIEjVFWkYBJLiR-6S3sCI",
@@ -178,6 +178,11 @@
           "name": "Вода Святой источник газ",
           "details": "0,5 л",
           "price": 110
+        },
+        {
+          "name": "Фанта",
+          "details": "0,5 л",
+          "price": 140
         }
       ]
     }

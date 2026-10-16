@@ -1,6 +1,6 @@
 {
   "title": "Прайс-лист микромаркета",
-  "updatedAt": "2026-10-15",
+  "updatedAt": "2026-10-16",
   "currency": "RUB",
   "source": {
     "spreadsheetId": "1xzuzm212lU10DwUxVl5E0jEIEjVFWkYBJLiR-6S3sCI",
@@ -92,6 +92,11 @@
           "name": "Чоко Пай пирожное",
           "details": "30 г",
           "price": 60
+        },
+        {
+          "name": "Печенье Кукис",
+          "details": "70 г",
+          "price": 120
         }
       ]
     },
@@ -175,14 +180,29 @@
           "price": 110
         },
         {
+          "name": "Вода Святой источник в ассортименте",
+          "details": "0,5 л",
+          "price": 120
+        },
+        {
           "name": "Вода Святой источник газ",
           "details": "0,5 л",
           "price": 110
         },
         {
+          "name": "Вода Сенежская без газа",
+          "details": "0,33л",
+          "price": 90
+        },
+        {
           "name": "Фанта",
           "details": "0,5 л",
           "price": 140
+        },
+        {
+          "name": "Дюшес напиток",
+          "details": "0,5 л",
+          "price": 110
         }
       ]
     }

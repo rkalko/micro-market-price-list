@@ -1,6 +1,6 @@
 {
   "title": "Прайс-лист микромаркета",
-  "updatedAt": "2026-10-16",
+  "updatedAt": "2026-10-27",
   "currency": "RUB",
   "source": {
     "spreadsheetId": "1xzuzm212lU10DwUxVl5E0jEIEjVFWkYBJLiR-6S3sCI",
@@ -97,6 +97,11 @@
           "name": "Печенье Кукис",
           "details": "70 г",
           "price": 120
+        },
+        {
+          "name": "Печенье Кучеряшка",
+          "details": "70 г",
+          "price": 100
         }
       ]
     },
@@ -148,6 +153,11 @@
           "name": "Кока-Кола Добрый напиток",
           "details": "0,33 л",
           "price": 130
+        },
+        {
+          "name": "Кока-Кола напиток",
+          "details": "0,5л",
+          "price": 140
         },
         {
           "name": "Апельсин Добрый",

@@ -1,6 +1,6 @@
 {
   "title": "Прайс-лист микромаркета",
-  "updatedAt": "2026-10-27",
+  "updatedAt": "2026-10-29",
   "currency": "RUB",
   "source": {
     "spreadsheetId": "1xzuzm212lU10DwUxVl5E0jEIEjVFWkYBJLiR-6S3sCI",
@@ -44,6 +44,11 @@
           "price": 130
         },
         {
+          "name": "Гренки Баяновъ в ассортименте",
+          "details": "80г",
+          "price": 80
+        },
+        {
           "name": "Кит Кат батончик",
           "details": "38 г",
           "price": 130
@@ -67,6 +72,11 @@
           "name": "Печенье Супер-Контик в ассортименте",
           "details": "100 г",
           "price": 90
+        },
+        {
+          "name": "Пряник Тульский",
+          "details": "130г",
+          "price": 80
         },
         {
           "name": "Трубочки вафельные Чудо в ассортименте",
